@@ -1,12 +1,164 @@
+import { useState } from "react";
 import "../styles/App.scss";
+const countryInfo = [
+  {
+    name: {
+      common: "Antigua and Barbuda",
+      official: "Antigua and Barbuda",
+      nativeName: {
+        eng: {
+          official: "Antigua and Barbuda",
+          common: "Antigua and Barbuda",
+        },
+      },
+    },
+    capital: ["Saint John's"],
+    flag: "🇦🇬",
+  },
+  {
+    name: {
+      common: "Italy",
+      official: "Italian Republic",
+      nativeName: {
+        ita: {
+          official: "Repubblica italiana",
+          common: "Italia",
+        },
+      },
+    },
+    capital: ["Rome"],
+    flag: "🇮🇹",
+  },
+  {
+    name: {
+      common: "Tuvalu",
+      official: "Tuvalu",
+      nativeName: {
+        eng: {
+          official: "Tuvalu",
+          common: "Tuvalu",
+        },
+        tvl: {
+          official: "Tuvalu",
+          common: "Tuvalu",
+        },
+      },
+    },
+    capital: ["Funafuti"],
+    flag: "🇹🇻",
+  },
+  {
+    name: {
+      common: "Anguilla",
+      official: "Anguilla",
+      nativeName: {
+        eng: {
+          official: "Anguilla",
+          common: "Anguilla",
+        },
+      },
+    },
+    capital: ["The Valley"],
+    flag: "🇦🇮",
+  },
+  {
+    name: {
+      common: "Australia",
+      official: "Commonwealth of Australia",
+      nativeName: {
+        eng: {
+          official: "Commonwealth of Australia",
+          common: "Australia",
+        },
+      },
+    },
+    capital: ["Canberra"],
+    flag: "🇦🇺",
+  },
+  {
+    name: {
+      common: "Belize",
+      official: "Belize",
+      nativeName: {
+        bjz: {
+          official: "Belize",
+          common: "Belize",
+        },
+        eng: {
+          official: "Belize",
+          common: "Belize",
+        },
+        spa: {
+          official: "Belice",
+          common: "Belice",
+        },
+      },
+    },
+    capital: ["Belmopan"],
+    flag: "🇧🇿",
+  },
+];
 
 function App() {
+  // Datos de la app
+  const [countries, setCountries] = useState(countryInfo);
+
+  const [filterText, setFilterText] = useState("");
+
+  // Listado filtrado
+
+  const filteredCountries = countries.filter((country) =>
+    country.name.common
+      .toLocaleLowerCase()
+      .includes(filterText.toLocaleLowerCase())
+  );
+
+  console.log("filterText", filterText);
+
+  const handleSubmit = (ev) => {
+    ev.preventDefault();
+  };
+
+  const handleInputFilter = (ev) => {
+    //console.log(ev.target.value);
+    setFilterText(ev.target.value);
+  };
+
   return (
     <div>
       <header className="header">
-        <h1 className="title">Plantilla React</h1>
+        <h1 className="title">Country Info App</h1>
       </header>
-      <main className="main">Holis Adalabers!!!</main>
+      <main className="main">
+        <form className="form" onSubmit={handleSubmit}>
+          <label htmlFor="filter">Filtrer</label>
+          <input
+            type=" text"
+            name="filter"
+            id="filter"
+            className="input"
+            placeholder="Spain..."
+            onInput={handleInputFilter}
+          />
+        </form>
+        <ul className="countries-list">
+          {filteredCountries.map((country) => {
+            return (
+              <li key={country.flag} className="country">
+                <span className="flag">{country.flag}</span>
+                <div className="country-body">
+                  <h2 class="country-name">{country.name.common}</h2>
+                  <p class="country-official">{country.name.official}</p>
+                  <p class="country-native">
+                    {country.name.nativeName.eng?.common}
+                  </p>
+                  <p class="country-capital">{country.capital}</p>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+      </main>
     </div>
   );
 }
