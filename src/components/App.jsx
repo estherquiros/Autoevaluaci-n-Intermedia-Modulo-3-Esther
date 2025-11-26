@@ -159,6 +159,9 @@ function App() {
           })}
         </ul>
       </main>
+      <footer className="footer">
+        <p>&copy; 2025 Country Info App. Adalab.</p>
+      </footer>
     </div>
   );
 }
