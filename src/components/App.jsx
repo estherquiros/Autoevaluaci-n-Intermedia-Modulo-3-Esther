@@ -3,6 +3,7 @@ import "../styles/App.scss";
 import Header from "./layout/Header";
 import Footer from "./layout/Footer";
 import CountryList from "./listing/CountryList";
+import Filters from "./listing/Filters";
 const countryInfo = [
   {
     name: {
@@ -131,17 +132,10 @@ function App() {
     <div>
       <Header />
       <main className="main">
-        <form className="form" onSubmit={handleSubmit}>
-          <label htmlFor="filter">Filtrer</label>
-          <input
-            type=" text"
-            name="filter"
-            id="filter"
-            className="input"
-            placeholder="Spain..."
-            onInput={handleInputFilter}
-          />
-        </form>
+        <Filters
+          handleInputFilter={handleInputFilter}
+          handleSubmit={handleSubmit}
+        />
         <CountryList countries={filteredCountries} />
       </main>
       <Footer />
