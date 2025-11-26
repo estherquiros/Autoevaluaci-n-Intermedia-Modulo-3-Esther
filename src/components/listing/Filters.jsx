@@ -1,7 +1,7 @@
 function Filter({ handleInputFilter, handleSubmit }) {
   return (
     <form className="form" onSubmit={handleSubmit}>
-      <label htmlFor="filter">Filtrer</label>
+      <label htmlFor="filter">Filter</label>
       <input
         type=" text"
         name="filter"
