@@ -1,5 +1,8 @@
 import { useState } from "react";
 import "../styles/App.scss";
+import Header from "./layout/Header";
+import Footer from "./layout/Footer";
+import CountryList from "./listing/CountryList";
 const countryInfo = [
   {
     name: {
@@ -101,7 +104,7 @@ const countryInfo = [
 
 function App() {
   // Datos de la app
-  const [countries, setCountries] = useState(countryInfo);
+  const [countries] = useState(countryInfo);
 
   const [filterText, setFilterText] = useState("");
 
@@ -126,9 +129,7 @@ function App() {
 
   return (
     <div>
-      <header className="header">
-        <h1 className="title">Country Info App</h1>
-      </header>
+      <Header />
       <main className="main">
         <form className="form" onSubmit={handleSubmit}>
           <label htmlFor="filter">Filtrer</label>
@@ -141,27 +142,9 @@ function App() {
             onInput={handleInputFilter}
           />
         </form>
-        <ul className="countries-list">
-          {filteredCountries.map((country) => {
-            return (
-              <li key={country.flag} className="country">
-                <span className="flag">{country.flag}</span>
-                <div className="country-body">
-                  <h2 class="country-name">{country.name.common}</h2>
-                  <p class="country-official">{country.name.official}</p>
-                  <p class="country-native">
-                    {country.name.nativeName.eng?.common}
-                  </p>
-                  <p class="country-capital">{country.capital}</p>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+        <CountryList countries={filteredCountries} />
       </main>
-      <footer className="footer">
-        <p>&copy; 2025 Country Info App. Adalab.</p>
-      </footer>
+      <Footer />
     </div>
   );
 }
